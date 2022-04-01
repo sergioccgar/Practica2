@@ -8,8 +8,106 @@ package edd.src.Estructuras;
  */
 public class Practica2 {
 
+    /**
+     * Método que imprime un estado del paso actual de las Torres de Hanoi.
+     */
+    public static void impTorres(int pasoActual, Pila<Integer> origen, Pila<Integer> auxiliar, Pila<Integer> destino){
+        System.out.println("###########################################################################");
+        System.out.println("El paso actual es el " + pasoActual + "°");
+        System.out.println(origen.toString() + " <- Torre de origen");
+        System.out.println(auxiliar.toString() +  " <- Torre auxiliar");
+        System.out.println(destino.toString() + " <- Torre de destino\n");
+    }
+
+    /**
+     * Método que simula un juego con Torres de Hanoi.
+     *
+     * @param cantidadDiscos Es el número de discos con el que comenzamos el juego.
+     * @param origen Representa a la varilla donde comienzan todos los discos.
+     * @param auxiliar Representa a la varilla del centro que nos sirve para nuestros movimientos intermedios.
+     * @param destino Representa a la varilla donde deben terminar todos los discos.
+     *
+     */
     public static void torresHanoi(int cantidadDiscos,Pila<Integer> origen, Pila<Integer> auxiliar, Pila<Integer> destino){
-        // No olvides imprimir cada paso de la solución.
+        // Agregamos el número de discos a la "varilla" de origen.
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("¡Bienvenidx a la Torre de Hanoi! Comencemos:");
+        for (int i = cantidadDiscos; i >= 1; i--){
+            origen.push(i);
+        }
+        // Calculamos el número de movimientos:
+        int numMovimientos = (int)(Math.pow(2,cantidadDiscos)-1);
+        System.out.println("El número de pasos a ejecutar es: " + numMovimientos);
+        // Revisamos la paridad de cantidadDiscos para ver cómo acomodar las "varillas" auxiliar y de destino.
+        boolean t = (cantidadDiscos%2==0);
+        System.out.println("El estado inicial de las torres es:");
+        impTorres(0,origen,auxiliar,destino);
+        // Dependiendo de el booleano t, hacemos uno u otro tipo de los siguientes movimientos:
+        if (t){
+            for (int i = 1; i <= numMovimientos; i++) {
+                if (i%3==1){
+                    if (origen.isEmpty()){
+                        origen.push(auxiliar.pop());
+                    } else if (auxiliar.isEmpty()) {
+                        auxiliar.push(origen.pop());
+                    } else if (origen.peek() < auxiliar.peek()){
+                        auxiliar.push(origen.pop());
+                    } else origen.push(auxiliar.pop());
+                }
+                if (i%3==2){
+                    if (origen.isEmpty()){
+                        origen.push(destino.pop());
+                    } else if (destino.isEmpty()) {
+                        destino.push(origen.pop());
+                    } else if (origen.peek() < destino.peek()){
+                        destino.push(origen.pop());
+                    } else origen.push(destino.pop());
+                }
+                if (i%3==0){
+                    if (destino.isEmpty()){
+                        destino.push(auxiliar.pop());
+                    } else if (auxiliar.isEmpty()) {
+                        auxiliar.push(destino.pop());
+                    } else if (destino.peek() < auxiliar.peek()){
+                        auxiliar.push(destino.pop());
+                    } else destino.push(auxiliar.pop());
+                }
+                impTorres(i,origen,auxiliar,destino);
+            }
+        } else {
+            for (int i = 1; i <= numMovimientos; i++) {
+                if (i%3==1){
+                    if (origen.isEmpty()){
+                        origen.push(destino.pop());
+                    } else if (destino.isEmpty()) {
+                        destino.push(origen.pop());
+                    } else if (origen.peek() < destino.peek()){
+                        destino.push(origen.pop());
+                    } else origen.push(destino.pop());
+                }
+                if (i%3==2){
+                    if (origen.isEmpty()){
+                        origen.push(auxiliar.pop());
+                    } else if (auxiliar.isEmpty()) {
+                        auxiliar.push(origen.pop());
+                    } else if (origen.peek() < auxiliar.peek()){
+                        auxiliar.push(origen.pop());
+                    } else origen.push(auxiliar.pop());
+                }
+                if (i%3==0){
+                    if (auxiliar.isEmpty()){
+                        auxiliar.push(destino.pop());
+                    } else if (destino.isEmpty()) {
+                        destino.push(auxiliar.pop());
+                    } else if (auxiliar.peek() < destino.peek()){
+                        destino.push(auxiliar.pop());
+                    } else auxiliar.push(destino.pop());
+                }
+                impTorres(i,origen,auxiliar,destino);
+            }
+        }
+        System.out.println("¡Terminamos!\n");
+
     }
 
 
@@ -129,7 +227,27 @@ public class Practica2 {
         }
 
         /**
-         * Revisa que peek de pilas funciona
+         * Revisa que Torres de Hanoi funcione
          */
+        Pila<Integer> a = new Pila<Integer>();
+        Pila<Integer> b = new Pila<Integer>();
+        Pila<Integer> c = new Pila<Integer>();
+        torresHanoi(1,a,b,c);
+        a.empty();
+        b.empty();
+        c.empty();
+        torresHanoi(2,a,b,c);
+        a.empty();
+        b.empty();
+        c.empty();
+        torresHanoi(3,a,b,c);
+        a.empty();
+        b.empty();
+        c.empty();
+        torresHanoi(4,a,b,c);
+        a.empty();
+        b.empty();
+        c.empty();
+        torresHanoi(5,a,b,c);
     }
 }
