@@ -1,4 +1,4 @@
-package edd.src.Automata;
+    package edd.src.Automata;
 
 import java.awt.Color;
 public abstract class AC implements AutomataCelular{
