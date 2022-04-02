@@ -20,48 +20,8 @@ public class Mondrian extends AC {
         //Inicializo dos matrices en blanco
         for (int i = 0; i < Maux2.length; i++) {
             for (int j = 0; j < Maux2.length; j++) {
-                Maux2[i][j] = 2;
-                MauxCopia[i][j] = 2;
-            }
-        }
-        // Modifico cada valor de la matriz Maux de forma aleatoria. Para empezar con un estado random de colores
-        for (int i = 0; i < Maux2.length; i++) {
-            for (int j = 0; j < Maux2.length; j++) {
-
-
-
-                if (i == 5 || i == 20) {
-
-                    Maux2[i][j] = 3;
-                } else if (j == 4 || j == 19) {
-                     Maux2[i][j] = 3;
-                } else if (i == 26 && j <= 4 ) {
-                    Maux2[i][j] = 3;
-                } else if (i == 28 && j >= 19 ) {
-                    Maux2[i][j] = 3;
-                } else if (i == 32 && (j >= 4 && j <19) ) {
-                    Maux2[i][j] = 3;
-                } else if ((i > 5 && i < 28) && j == 23 ) {
-                    Maux2[i][j] = 3;
-                } else if ((i > 28) && j == 25 ) {
-                    Maux2[i][j] = 3;
-                } else if (i > 5  && i < 20  && j > 4 && j < 19 ) {
-                    Maux2[i][j] = 4;
-                } else if (i > 20 && i < 26 && j <4 ) {
-                    Maux2[i][j] = 4;
-                } else if (i > 32 && j > 4 && j < 19 ) {
-                    Maux2[i][j] = 4;
-                } else if (i > 28 && j > 19 && j < 26 ) {
-                    Maux2[i][j] = 4;
-                } else if (i > 5 && i < 20 && j > 23) {
-                    Maux2[i][j] = 4;
-                } else if (i < 5 && j < 4) {
-                    Maux2[i][j] = 4;
-                } else if (i > 5 && i < 20 && j < 4) {
-                    Maux2[i][j] = 4;
-                } else if (i > 28 && j > 25) {
-                    Maux2[i][j] = 4;
-                }
+                Maux2[i][j] = (int) (Math.random() * 6);
+                MauxCopia[i][j] = (int) (Math.random() * 6);
             }
         }
         return Maux2;
