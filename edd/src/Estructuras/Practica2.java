@@ -1,6 +1,6 @@
 package edd.src.Estructuras;
 
-
+import java.util.Scanner;
 /**
  * Clase que prueba los métodos caracteristicos de una cola y una pila, además, implementa un
  * método que convierte los número sdecimales a binarios y otro método que simula las torrers de Hanoi.
@@ -12,7 +12,7 @@ public class Practica2 {
      * Método que imprime un estado del paso actual de las Torres de Hanoi.
      */
     public static void impTorres(int pasoActual, Pila<Integer> origen, Pila<Integer> auxiliar, Pila<Integer> destino){
-        System.out.println("###########################################################################");
+        System.out.println("####################################");
         System.out.println("El paso actual es el " + pasoActual + "°");
         System.out.println(origen.toString() + " <- Torre de origen");
         System.out.println(auxiliar.toString() +  " <- Torre auxiliar");
@@ -249,5 +249,14 @@ public class Practica2 {
         b.empty();
         c.empty();
         torresHanoi(5,a,b,c);
+        a.empty();
+        b.empty();
+        c.empty();
+        Scanner scn = new Scanner(System.in);
+        System.out.println("¡Es tu turno! Dame un número y te daré la simulación de un juego de Torres de Hanoi con el número de discos que ingreses.");
+        int n = Integer.parseInt(scn.nextLine());
+        torresHanoi(n,a,b,c);
+        System.out.println("¡Hasta entonceees!");
+
     }
 }
